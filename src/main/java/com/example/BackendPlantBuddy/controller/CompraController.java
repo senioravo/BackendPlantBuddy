@@ -38,20 +38,42 @@ public class CompraController {
     
     @PostMapping("/crear")
     public ResponseEntity<?> crearCompra(@Valid @RequestBody CreateCompraRequestDTO request) {
+        System.out.println("========================================");
+        System.out.println("POST /compras/crear recibido");
+        System.out.println("UserId: " + request.getUserId());
+        System.out.println("Items: " + request.getItems().size());
+        System.out.println("Dirección: " + request.getShippingAddress());
+        System.out.println("Método de pago: " + request.getPaymentMethod());
+        System.out.println("========================================");
+        
         try {
             CompraDTO compra = compraService.crearCompra(request);
+            System.out.println("Compra creada exitosamente. ID: " + compra.getId());
             return ResponseEntity.ok(compra);
         } catch (RuntimeException e) {
+            System.err.println("ERROR al crear compra: " + e.getMessage());
+            e.printStackTrace();
             return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
         }
     }
     
     @PutMapping("/finalizar")
     public ResponseEntity<?> finalizarCompra(@Valid @RequestBody CreateCompraRequestDTO request) {
+        System.out.println("========================================");
+        System.out.println("PUT /compras/finalizar recibido");
+        System.out.println("UserId: " + request.getUserId());
+        System.out.println("Items: " + request.getItems().size());
+        System.out.println("Dirección: " + request.getShippingAddress());
+        System.out.println("Método de pago: " + request.getPaymentMethod());
+        System.out.println("========================================");
+        
         try {
             CompraDTO compra = compraService.crearCompra(request);
+            System.out.println("Compra creada exitosamente. ID: " + compra.getId());
             return ResponseEntity.ok(compra);
         } catch (RuntimeException e) {
+            System.err.println("ERROR al crear compra: " + e.getMessage());
+            e.printStackTrace();
             return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
         }
     }
