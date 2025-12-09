@@ -37,12 +37,22 @@ public class CompraController {
     }
     
     @PostMapping("/crear")
-    public ResponseEntity<CompraDTO> crearCompra(@Valid @RequestBody CreateCompraRequestDTO request) {
+    public ResponseEntity<?> crearCompra(@Valid @RequestBody CreateCompraRequestDTO request) {
         try {
             CompraDTO compra = compraService.crearCompra(request);
             return ResponseEntity.ok(compra);
         } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+        }
+    }
+    
+    @PutMapping("/finalizar")
+    public ResponseEntity<?> finalizarCompra(@Valid @RequestBody CreateCompraRequestDTO request) {
+        try {
+            CompraDTO compra = compraService.crearCompra(request);
+            return ResponseEntity.ok(compra);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
         }
     }
     
